@@ -98,3 +98,28 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Profecta logo (logoprofecta.jpg) */
+.headerlogo img,
+.footertab-logo img,
+.sidemenu-logo img {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.headerlogo:not(.headerlogo-resp) img {
+  max-height: 44px;
+  max-width: 44px;
+}
+
+.headerlogo-resp img {
+  max-height: 56px;
+  max-width: 160px;
+}
+
+.footertab-logo img,
+.sidemenu-logo img {
+  max-height: 72px;
+  max-width: 180px;
+}
