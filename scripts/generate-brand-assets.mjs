@@ -5,7 +5,7 @@ import sharp from 'sharp';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
-const source = path.join(root, 'logoprofecta.jpg');
+const source = path.join(root, 'images', 'template', 'profectalogootje.png');
 const templateDir = path.join(root, 'images', 'template');
 
 async function detectIconBounds(imagePath) {
