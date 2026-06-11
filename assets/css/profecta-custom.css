@@ -181,14 +181,16 @@
   }
 }
 
-/* Homepage hero: Google review badge direct zichtbaar en klikbaar op mobiel */
-.review-badge--hero-mobile {
-  display: none;
-}
-
+/* Homepage: Google review badge + 500+ logos op mobiel */
 @media (max-width: 900px) {
-  .page130 .review-badge--hero-mobile {
-    display: inline-flex;
+  .page130 .page-hero-txt.slideshow-content {
+    position: relative;
+    z-index: 6;
+  }
+
+  /* Direct onder de hero-knoppen */
+  .page130 .page-hero-txt .review-badge--hero-mobile {
+    display: flex !important;
     align-items: center;
     gap: 8px;
     margin-top: 20px;
@@ -196,35 +198,34 @@
     text-decoration: none;
     color: inherit;
     position: relative;
-    z-index: 6;
+    z-index: 10;
     opacity: 1 !important;
     visibility: visible !important;
-    -webkit-tap-highlight-color: transparent;
-    cursor: pointer;
+    justify-content: flex-start;
     min-height: 44px;
   }
 
-  .page130 .review-badge--hero-mobile .review-badge-stars-holder {
-    position: relative;
-  }
-
-  .page130 .review-badge--hero-mobile:active {
-    opacity: 0.85;
-  }
-
-  .page130 .review-badge--hero-mobile .review-badge-score-total {
+  .page130 .page-hero-txt .review-badge--hero-mobile .review-badge-score-total {
     font-weight: 600;
     color: var(--heading-color);
     font-size: 16px;
     line-height: 18px;
   }
 
-  /* Alleen dubbele review-badge verbergen; 500+ logos blijven zichtbaar */
-  .page130 #logosfullwrapper > .review-badge--logos {
-    display: none;
+  .page130 .page-hero-txt .review-badge--hero-mobile .review-badge-stars-holder {
+    position: relative;
   }
 
-  /* FadeInUp houdt opacity:0 tot scroll — op mobiel logos direct tonen */
+  /* Ook boven "500+ bedrijven" (na scroll) */
+  .page130 #logosfullwrapper > .review-badge--logos {
+    display: flex !important;
+    justify-content: center;
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin-bottom: 8px;
+  }
+
+  /* FadeInUp houdt opacity:0 tot scroll — op mobiel direct tonen */
   .page130 #logosfullwrapper,
   .page130 #logosfullwrapper .logostitlewrapper,
   .page130 #logosfullwrapper .logoscontent {
