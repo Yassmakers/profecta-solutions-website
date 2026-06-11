@@ -126,7 +126,14 @@
   left: 0 !important;
 }
 
-.footertab-logo img,
+.footertab-logo img {
+  max-height: 48px;
+  max-width: 240px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 .sidemenu-logo img {
   max-height: 68px;
   max-width: 170px;
