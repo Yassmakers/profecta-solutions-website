@@ -181,34 +181,34 @@
   }
 }
 
-/* Homepage: logos-sectie los van hero (eigen vlak, zoals desktop) */
-.page130 #logosfullwrapper {
-  position: relative;
-  z-index: 5;
-  background: var(--light-bg);
-}
-
+/* Homepage: review-badge + 500+ logos op mobiel (zelfde als desktop) */
 @media (max-width: 900px) {
-  .page130 #page-hero-full-wrapper.page-hero-txt-images {
-    padding-bottom: 40px !important;
+  .page130 #logosfullwrapper.content-section-large-top {
+    padding-top: 24px !important;
   }
 
-  .page130 #logosfullwrapper.content-section-large-top {
-    padding-top: 0 !important;
-    padding-bottom: 36px !important;
+  .page130 #logosfullwrapper,
+  .page130 #logosfullwrapper .review-badge,
+  .page130 #logosfullwrapper .logostitlewrapper,
+  .page130 #logosfullwrapper .logoscontent {
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: none !important;
   }
 
   .page130 #logosfullwrapper > .review-badge {
-    padding-top: 28px;
-    margin-bottom: 10px;
+    display: flex !important;
+    justify-content: center;
+    margin-bottom: 12px;
   }
 
   .page130 #logosfullwrapper .logostitlewrapper {
-    margin-bottom: 28px;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 
   .page130 #logosfullwrapper .logostitlewrapper p {
-    font-size: 18px;
+    margin: 0;
   }
 }
 
