@@ -1,0 +1,100 @@
+/* Profecta Solutions custom overrides */
+
+/* AI applicaties: smaller hover subtitle so it fits on one line in the pill */
+.hoofdmenudesktop-rechts .submenu-li a[href*="ai-applicaties"] span.menulabel-hover {
+  font-size: 12px;
+  line-height: 15px;
+  padding: 18px 12px;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.hoofdmenudesktop-rechts .submenu-li:hover > a[href*="ai-applicaties"],
+.hoofdmenudesktop-rechts .submenu-li:focus-within > a[href*="ai-applicaties"] {
+  min-width: max-content;
+}
+
+.hoofdmenudesktop-rechts .submenu-li:hover > a[href*="ai-applicaties"] span.menulabel-hover,
+.hoofdmenudesktop-rechts .submenu-li:focus-within > a[href*="ai-applicaties"] span.menulabel-hover {
+  transform: translateX(-50%) scale(1);
+  font-size: 12px;
+  line-height: 15px;
+  width: max-content;
+  min-width: 100%;
+}
+
+.linkblocks-overview.profecta-services {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.profecta-services-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profecta-services-left .linkblock-wrapper,
+.profecta-services-right .linkblock-wrapper {
+  margin: 0;
+}
+
+.profecta-services-left .linkblock-content,
+.profecta-services-right .linkblock-content {
+  min-height: 100%;
+}
+
+.profecta-services .linkblock-info {
+  min-width: 0;
+  padding: 28px 0 28px 28px !important;
+}
+
+.profecta-services .linkblock-foto {
+  flex: 0 0 200px !important;
+  padding: 20px 20px 20px 0 !important;
+}
+
+.profecta-services .linkblock-foto .img-holder {
+  left: 0 !important;
+  right: 16px !important;
+}
+
+/* Footer CSS loads after head — !important needed to beat linkblock-info fixed heights */
+.profecta-services .linkblock-info h3,
+.profecta-services .linkblock-info h3.ellipsis {
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  -webkit-box-orient: unset !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  word-break: normal !important;
+  height: auto !important;
+  max-height: none !important;
+  font-size: 26px !important;
+  line-height: 1.3 !important;
+  margin-bottom: 12px !important;
+}
+
+.profecta-services .linkblock-info p,
+.profecta-services .linkblock-info p.ellipsis {
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  -webkit-box-orient: unset !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  word-break: normal !important;
+  height: auto !important;
+  max-height: none !important;
+  padding-right: 0 !important;
+  margin-bottom: 20px !important;
+  font-size: 17px !important;
+  line-height: 1.45 !important;
+}
+
+@media (max-width: 900px) {
+  .linkblocks-overview.profecta-services {
+    grid-template-columns: 1fr;
+  }
+}

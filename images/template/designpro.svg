@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 254 36" role="img" aria-label="Profecta Solutions">
+  <rect x="0" y="3" width="30" height="30" rx="7" fill="#0c3c54"/>
+  <path d="M8 10h8.5c3.7 0 6.2 2.2 6.2 5.5 0 1.9-.9 3.5-2.5 4.5L24.5 26H19l-3.8-6H14.5V26H8V10zm5.4 8.9h2.9c1.6 0 2.5-.9 2.5-2.3 0-1.4-.9-2.2-2.5-2.2h-2.9v4.5z" fill="#348594"/>
+  <text x="40" y="25" font-family="Figtree, Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#0c3c54">Profecta</text>
+  <text x="128" y="25" font-family="Figtree, Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#348594">Solutions</text>
+</svg>

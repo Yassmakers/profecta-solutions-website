@@ -1,0 +1,14 @@
+{
+  "name": "profecta-solutions-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Statische website voor Profecta Solutions",
+  "scripts": {
+    "start": "node serve.mjs",
+    "dev": "node serve.mjs",
+    "refresh-css": "node refresh-generated-css.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
