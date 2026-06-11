@@ -180,3 +180,50 @@
     height: 48px !important;
   }
 }
+
+/* Homepage hero: Google review badge direct zichtbaar en klikbaar op mobiel */
+.review-badge--hero-mobile {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .page130 .review-badge--hero-mobile {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 6px 0;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    z-index: 6;
+    opacity: 1 !important;
+    visibility: visible !important;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    min-height: 44px;
+  }
+
+  .page130 .review-badge--hero-mobile .review-badge-stars-holder {
+    position: relative;
+  }
+
+  .page130 .review-badge--hero-mobile:active {
+    opacity: 0.85;
+  }
+
+  .page130 .review-badge--hero-mobile .review-badge-score-total {
+    font-weight: 600;
+    color: var(--heading-color);
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .page130 #logosfullwrapper > .review-badge--logos {
+    display: none;
+  }
+
+  .page130 #logosfullwrapper.content-section-large-top {
+    padding-top: 48px;
+  }
+}
