@@ -100,25 +100,32 @@
 }
 
 /* Profecta logo: profectalogootje.png in header circle */
+.headertablogo {
+  flex: 0 0 105px;
+}
+
 .headertablogo a.headerlogo:not(.headerlogo-resp) {
-  padding: 4px;
+  width: 105px;
+  height: 105px;
+  border-radius: 105px;
+  padding: 0;
   overflow: hidden;
 }
 
 .headertablogo a.headerlogo:not(.headerlogo-resp) img {
-  width: 50px !important;
-  height: 50px !important;
-  max-width: 50px !important;
-  max-height: 50px !important;
+  width: auto !important;
+  height: 105px !important;
+  max-width: none !important;
+  max-height: none !important;
   left: 0 !important;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   border-radius: 50%;
   transition: transform 0.5s ease;
 }
 
 .headertablogo a.headerlogo:not(.headerlogo-resp):hover img {
-  transform: scale(1.12);
+  transform: scale(1.08);
 }
 
 .headerlogo-resp img {
@@ -145,14 +152,17 @@
 }
 
 @media (max-width: 900px) {
+  .headertablogo {
+    flex: 0 0 72px;
+  }
+
   .headertablogo a.headerlogo:not(.headerlogo-resp) {
-    padding: 3px;
+    width: 72px;
+    height: 72px;
+    border-radius: 72px;
   }
 
   .headertablogo a.headerlogo:not(.headerlogo-resp) img {
-    width: 40px !important;
-    height: 40px !important;
-    max-width: 40px !important;
-    max-height: 40px !important;
+    height: 72px !important;
   }
 }
