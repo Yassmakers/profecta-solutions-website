@@ -219,11 +219,17 @@
     line-height: 18px;
   }
 
+  /* Alleen dubbele review-badge verbergen; 500+ logos blijven zichtbaar */
   .page130 #logosfullwrapper > .review-badge--logos {
     display: none;
   }
 
-  .page130 #logosfullwrapper.content-section-large-top {
-    padding-top: 48px;
+  /* FadeInUp houdt opacity:0 tot scroll — op mobiel logos direct tonen */
+  .page130 #logosfullwrapper,
+  .page130 #logosfullwrapper .logostitlewrapper,
+  .page130 #logosfullwrapper .logoscontent {
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: none !important;
   }
 }
