@@ -99,19 +99,20 @@
   }
 }
 
-/* Profecta logo: cloud icon in header circle, full logo elsewhere */
+/* Profecta logo: SVG mark in header circle */
 .headertablogo a.headerlogo:not(.headerlogo-resp) {
-  padding: 10px;
+  padding: 9px;
   overflow: hidden;
 }
 
 .headertablogo a.headerlogo:not(.headerlogo-resp) img {
-  width: 36px !important;
-  height: 36px !important;
-  max-width: 36px !important;
-  max-height: 36px !important;
+  width: 38px !important;
+  height: 38px !important;
+  max-width: 38px !important;
+  max-height: 38px !important;
   left: 0 !important;
   object-fit: contain;
+  object-position: center;
   transition: transform 0.5s ease;
 }
 
@@ -148,9 +149,9 @@
   }
 
   .headertablogo a.headerlogo:not(.headerlogo-resp) img {
-    width: 30px !important;
-    height: 30px !important;
-    max-width: 30px !important;
-    max-height: 30px !important;
+    width: 32px !important;
+    height: 32px !important;
+    max-width: 32px !important;
+    max-height: 32px !important;
   }
 }
