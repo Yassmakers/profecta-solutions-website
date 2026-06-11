@@ -183,8 +183,12 @@
 
 /* Homepage: review-badge + 500+ logos op mobiel (zelfde als desktop) */
 @media (max-width: 900px) {
+  /* Hero slideshow (z-index 4) overlapt logos-sectie; badge zat er visueel onder */
   .page130 #logosfullwrapper.content-section-large-top {
+    position: relative;
+    z-index: 5;
     padding-top: 24px !important;
+    background: var(--white);
   }
 
   .page130 #logosfullwrapper,
@@ -199,6 +203,8 @@
   .page130 #logosfullwrapper > .review-badge {
     display: flex !important;
     justify-content: center;
+    position: relative;
+    z-index: 1;
     margin-bottom: 12px;
   }
 
