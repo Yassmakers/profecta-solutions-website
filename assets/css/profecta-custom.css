@@ -181,56 +181,33 @@
   }
 }
 
-/* Homepage: Google review badge + 500+ logos op mobiel */
+/* Homepage: review-badge + 500+ logos op mobiel (zelfde als desktop) */
 @media (max-width: 900px) {
-  .page130 .page-hero-txt.slideshow-content {
-    position: relative;
-    z-index: 6;
+  .page130 #logosfullwrapper.content-section-large-top {
+    padding-top: 24px !important;
   }
 
-  /* Direct onder de hero-knoppen */
-  .page130 .page-hero-txt .review-badge--hero-mobile {
-    display: flex !important;
-    align-items: center;
-    gap: 8px;
-    margin-top: 20px;
-    padding: 6px 0;
-    text-decoration: none;
-    color: inherit;
-    position: relative;
-    z-index: 10;
-    opacity: 1 !important;
-    visibility: visible !important;
-    justify-content: flex-start;
-    min-height: 44px;
-  }
-
-  .page130 .page-hero-txt .review-badge--hero-mobile .review-badge-score-total {
-    font-weight: 600;
-    color: var(--heading-color);
-    font-size: 16px;
-    line-height: 18px;
-  }
-
-  .page130 .page-hero-txt .review-badge--hero-mobile .review-badge-stars-holder {
-    position: relative;
-  }
-
-  /* Ook boven "500+ bedrijven" (na scroll) */
-  .page130 #logosfullwrapper > .review-badge--logos {
-    display: flex !important;
-    justify-content: center;
-    opacity: 1 !important;
-    visibility: visible !important;
-    margin-bottom: 8px;
-  }
-
-  /* FadeInUp houdt opacity:0 tot scroll — op mobiel direct tonen */
   .page130 #logosfullwrapper,
+  .page130 #logosfullwrapper .review-badge,
   .page130 #logosfullwrapper .logostitlewrapper,
   .page130 #logosfullwrapper .logoscontent {
     opacity: 1 !important;
     visibility: visible !important;
     animation: none !important;
+  }
+
+  .page130 #logosfullwrapper > .review-badge {
+    display: flex !important;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .page130 #logosfullwrapper .logostitlewrapper {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .page130 #logosfullwrapper .logostitlewrapper p {
+    margin: 0;
   }
 }
