@@ -211,3 +211,9 @@
     margin: 0;
   }
 }
+
+/* Contact-tab: rechter decoratief beeld (vinger) verbergen */
+.sidemenu-contact-img-2,
+.content-section-blocks-txt-mobileimg-2 {
+  display: none !important;
+}
