@@ -57,7 +57,18 @@ function regionsSection(kind, selfSlug) {
     .filter((c) => c.slug !== selfSlug)
     .map((c) => `<a href="${prefix}${c.slug}.html"><span>${label} in ${esc(c.name)}</span></a>`)
     .join(', ');
-  return `<section id="local-seo-regions" class="content-section-medium-top content-section-footer"><div class="content-section-full-wrapper"><div class="content-section-inner scale layout-content"><h2>${h2}</h2><p>We werken voor ondernemers in heel Nederland. Bekijk ook ${links}. Op elke pagina lees je hoe we lokaal scoren in Google en wat je kunt verwachten qua aanpak en oplevering.</p></div></div></section>`;
+  return `<section id="local-seo-regions" class="content-section-medium-top content-section-footer"><div class="content-section-full-wrapper"><div class="content-section-inner scale layout-content"><h2>${h2}</h2><p>We werken voor ondernemers in heel Nederland. Bekijk ook ${links}. Op elke pagina lees je hoe we lokaal scoren in Google en wat je kunt verwachten qua aanpak en oplevering. Alle steden staan op ons <a href="website-maken-nederland.html"><span>overzicht website maken per stad</span></a>.</p></div></div></section>`;
+}
+
+function allCitiesSection(kind, selfSlug) {
+  const prefix = kind === 'website' ? 'website-maken-' : 'app-maken-';
+  const label = kind === 'website' ? 'Website maken' : 'App laten maken';
+  const h2 = kind === 'website' ? 'Website maken in elke stad' : 'App laten maken in elke stad';
+  const items = cities
+    .filter((c) => c.slug !== selfSlug)
+    .map((c) => `<li><a href="${prefix}${c.slug}.html"><span>${label} ${esc(c.name)}</span></a></li>`)
+    .join('');
+  return `<section id="local-seo-all-cities-${kind}-${selfSlug}" class="content-section-medium-top content-section-footer"><div class="content-section-full-wrapper"><div class="content-section-inner scale layout-content"><h2>${h2}</h2><ul class="site-index local-seo-city-list">${items}</ul></div></div></section>`;
 }
 
 function citySectionWebsite(c) {
@@ -127,7 +138,7 @@ function buildWebsitePage(template, c) {
   // local-seo block
   html = html.replace(
     /<section id="local-seo-regions"[\s\S]*?<\/section>(?=<section\r?\nid="inhoud")/,
-    regionsSection('website', c.slug) + citySectionWebsite(c),
+    regionsSection('website', c.slug) + citySectionWebsite(c) + allCitiesSection('website', c.slug),
   );
 
   // menu active: amsterdam is active in template
@@ -215,7 +226,7 @@ function buildAppPage(template, c) {
   html = html.replace(h1Block, `<h1>App laten maken in ${esc(c.name)}</h1><p>${intro}</p>`);
 
   // inject local-seo + city ld+json before #inhoud
-  const inject = appCityLdJson(c) + regionsSection('app', c.slug) + citySectionApp(c);
+  const inject = appCityLdJson(c) + regionsSection('app', c.slug) + citySectionApp(c) + allCitiesSection('app', c.slug);
   html = html.replace(/<section\r?\nid="inhoud"/, `${inject}<section\nid="inhoud"`);
 
   return html;
@@ -239,6 +250,27 @@ for (const c of cities) {
   fs.writeFileSync(path.join(root, `app-maken-${c.slug}.html`), aHtml);
   console.log('app', c.slug);
   generated.push(`app-maken-${c.slug}.html`);
+}
+
+// Amsterdam + Almere website: voeg crosslinks toe zonder volledige pagina te overschrijven
+for (const slug of ['amsterdam', 'almere']) {
+  const file = `website-maken-${slug}.html`;
+  const p = path.join(root, file);
+  let html = fs.readFileSync(p, 'utf8');
+  if (!html.includes(`local-seo-all-cities-website-${slug}`)) {
+    html = html.replace(
+      /(<section id="local-seo-website-maken-[^"]+"[\s\S]*?<\/section>)/,
+      `$1${allCitiesSection('website', slug)}`,
+    );
+  }
+  if (!html.includes('website-maken-nederland.html')) {
+    html = html.replace(
+      /(<section id="local-seo-regions"[\s\S]*?<p>We helpen ondernemers[\s\S]*?<\/p>)/,
+      (m) => (m.includes('website-maken-nederland.html') ? m : m.replace('</p>', ' Alle steden staan op ons <a href="website-maken-nederland.html"><span>overzicht website maken per stad</span></a>.</p>')),
+    );
+  }
+  fs.writeFileSync(p, html);
+  console.log('website crosslinks', slug);
 }
 
 // expose list for sitemap script

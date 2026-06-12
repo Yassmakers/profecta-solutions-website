@@ -37,6 +37,7 @@ const homeBaseCities = new Set([
 
 function priorityFor(rel) {
   if (rel === 'index.html') return '1.0';
+  if (rel === 'website-maken-nederland.html') return '0.98';
   if (homeBaseCities.has(rel)) return '0.95';
   if (/^website-maken-|^app-maken-/.test(rel)) return '0.85';
   if (/^(website-laten-maken|webshop-laten-maken|ai-applicaties|online-marketing|webdesignbureau)\.html$/.test(rel)) return '0.9';
