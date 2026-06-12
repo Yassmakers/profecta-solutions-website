@@ -7,42 +7,37 @@ const root = path.join(__dirname, '..');
 
 const AGG = '{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"31","bestRating":"5","worstRating":"1"}';
 
-// Anker 1: Service-node (constante serviceType-regel in de website-template)
-const serviceAnchor = '"serviceType": "Webdesign en website ontwikkeling",';
-const serviceReplace = `"serviceType": "Webdesign en website ontwikkeling",\n            "aggregateRating": ${AGG},`;
+// Review-sterren worden door Google ALLEEN ondersteund op LocalBusiness-types
+// (zoals ProfessionalService), niet op Service. Daarom plaatsen we de rating
+// uitsluitend op de ProfessionalService-node, na het geo-blok.
+const serviceWithRating = `"serviceType": "Webdesign en website ontwikkeling",\n            "aggregateRating": ${AGG},`;
+const serviceClean = '"serviceType": "Webdesign en website ontwikkeling",';
 
-// Anker 2: ProfessionalService-node (na het geo-blok)
 const geoAnchor = '                "longitude": 5.2157\n            },';
-const geoReplace = `                "longitude": 5.2157\n            },\n            "aggregateRating": ${AGG},`;
+const geoWithRating = `                "longitude": 5.2157\n            },\n            "aggregateRating": ${AGG},`;
 
-const files = fs
-  .readdirSync(root)
-  .filter((f) => /^website-maken-.*\.html$/.test(f));
+const files = fs.readdirSync(root).filter((f) => /^website-maken-.*\.html$/.test(f));
 
-let patched = 0;
-let skipped = 0;
+let changed = 0;
 for (const f of files) {
   const p = path.join(root, f);
   let html = fs.readFileSync(p, 'utf8');
-  if (html.includes('"aggregateRating"')) {
-    skipped++;
-    continue;
+  const before = html;
+
+  // 1) Verwijder eventueel eerder toegevoegde rating op de Service-node
+  if (html.includes(serviceWithRating)) {
+    html = html.replace(serviceWithRating, serviceClean);
   }
-  let changed = false;
-  if (html.includes(serviceAnchor)) {
-    html = html.replace(serviceAnchor, serviceReplace);
-    changed = true;
+
+  // 2) Zorg dat ProfessionalService de rating heeft (na geo-blok)
+  if (!html.includes(geoWithRating) && html.includes(geoAnchor)) {
+    html = html.replace(geoAnchor, geoWithRating);
   }
-  if (html.includes(geoAnchor)) {
-    html = html.replace(geoAnchor, geoReplace);
-    changed = true;
-  }
-  if (changed) {
+
+  if (html !== before) {
     fs.writeFileSync(p, html);
-    patched++;
-    console.log('rating ->', f);
-  } else {
-    console.log('GEEN anker gevonden in', f);
+    changed++;
+    console.log('fixed ->', f);
   }
 }
-console.log(`\nKlaar: ${patched} gepatcht, ${skipped} al voorzien.`);
+console.log(`\nKlaar: ${changed} bestanden bijgewerkt (rating alleen op ProfessionalService).`);

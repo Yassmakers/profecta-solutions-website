@@ -155,7 +155,6 @@ function appCityLdJson(c) {
         areaServed: serveList(c),
         description: `App laten maken in ${c.name}? Profecta Solutions bouwt maatwerk apps en platformen die processen automatiseren en werk uit handen nemen.`,
         url: `${DOMAIN}/app-maken-${c.slug}.html`,
-        aggregateRating: RATING,
       },
       {
         '@type': 'ProfessionalService',
