@@ -8,6 +8,9 @@ const root = path.join(__dirname, '..');
 const DOMAIN = 'https://www.profecta-solutions.nl';
 const OG_IMAGE = `${DOMAIN}/includes/_Files/afbeeldingen/fotos/website-bouwen.jpg`;
 
+// Echte Google-beoordeling van Profecta Solutions (zie homepage review-badge)
+const RATING = { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '31', bestRating: '5', worstRating: '1' };
+
 /**
  * Steden waarvoor we lokale SEO-landingspagina's genereren.
  * Voeg hier simpelweg een object toe om een nieuwe stad te ondersteunen.
@@ -152,6 +155,7 @@ function appCityLdJson(c) {
         areaServed: serveList(c),
         description: `App laten maken in ${c.name}? Profecta Solutions bouwt maatwerk apps en platformen die processen automatiseren en werk uit handen nemen.`,
         url: `${DOMAIN}/app-maken-${c.slug}.html`,
+        aggregateRating: RATING,
       },
       {
         '@type': 'ProfessionalService',
@@ -170,6 +174,7 @@ function appCityLdJson(c) {
         },
         geo: { '@type': 'GeoCoordinates', latitude: 52.3755, longitude: 5.2157 },
         areaServed: serveList(c).map((n) => ({ '@type': 'City', name: n })),
+        aggregateRating: RATING,
       },
     ],
   };
