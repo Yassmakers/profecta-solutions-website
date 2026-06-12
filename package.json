@@ -6,9 +6,15 @@
   "scripts": {
     "start": "node serve.mjs",
     "dev": "node serve.mjs",
-    "refresh-css": "node refresh-generated-css.mjs"
+    "refresh-css": "node refresh-generated-css.mjs",
+    "sitemap": "node scripts/build-sitemap.mjs",
+    "seo-audit": "node scripts/seo-audit.mjs",
+    "ping-sitemap": "node scripts/ping-sitemap.mjs"
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0"
   }
 }
