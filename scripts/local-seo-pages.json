@@ -1,0 +1,126 @@
+{
+  "cities": [
+    {
+      "slug": "amsterdam",
+      "name": "Amsterdam"
+    },
+    {
+      "slug": "almere",
+      "name": "Almere"
+    },
+    {
+      "slug": "rotterdam",
+      "name": "Rotterdam"
+    },
+    {
+      "slug": "den-haag",
+      "name": "Den Haag"
+    },
+    {
+      "slug": "utrecht",
+      "name": "Utrecht"
+    },
+    {
+      "slug": "eindhoven",
+      "name": "Eindhoven"
+    },
+    {
+      "slug": "groningen",
+      "name": "Groningen"
+    },
+    {
+      "slug": "tilburg",
+      "name": "Tilburg"
+    },
+    {
+      "slug": "breda",
+      "name": "Breda"
+    },
+    {
+      "slug": "nijmegen",
+      "name": "Nijmegen"
+    },
+    {
+      "slug": "haarlem",
+      "name": "Haarlem"
+    },
+    {
+      "slug": "arnhem",
+      "name": "Arnhem"
+    },
+    {
+      "slug": "amersfoort",
+      "name": "Amersfoort"
+    },
+    {
+      "slug": "zwolle",
+      "name": "Zwolle"
+    },
+    {
+      "slug": "den-bosch",
+      "name": "'s-Hertogenbosch"
+    },
+    {
+      "slug": "lelystad",
+      "name": "Lelystad"
+    },
+    {
+      "slug": "apeldoorn",
+      "name": "Apeldoorn"
+    },
+    {
+      "slug": "leiden",
+      "name": "Leiden"
+    },
+    {
+      "slug": "maastricht",
+      "name": "Maastricht"
+    },
+    {
+      "slug": "zaandam",
+      "name": "Zaandam"
+    }
+  ],
+  "pages": [
+    "website-maken-amsterdam.html",
+    "app-maken-amsterdam.html",
+    "website-maken-almere.html",
+    "app-maken-almere.html",
+    "website-maken-rotterdam.html",
+    "app-maken-rotterdam.html",
+    "website-maken-den-haag.html",
+    "app-maken-den-haag.html",
+    "website-maken-utrecht.html",
+    "app-maken-utrecht.html",
+    "website-maken-eindhoven.html",
+    "app-maken-eindhoven.html",
+    "website-maken-groningen.html",
+    "app-maken-groningen.html",
+    "website-maken-tilburg.html",
+    "app-maken-tilburg.html",
+    "website-maken-breda.html",
+    "app-maken-breda.html",
+    "website-maken-nijmegen.html",
+    "app-maken-nijmegen.html",
+    "website-maken-haarlem.html",
+    "app-maken-haarlem.html",
+    "website-maken-arnhem.html",
+    "app-maken-arnhem.html",
+    "website-maken-amersfoort.html",
+    "app-maken-amersfoort.html",
+    "website-maken-zwolle.html",
+    "app-maken-zwolle.html",
+    "website-maken-den-bosch.html",
+    "app-maken-den-bosch.html",
+    "website-maken-lelystad.html",
+    "app-maken-lelystad.html",
+    "website-maken-apeldoorn.html",
+    "app-maken-apeldoorn.html",
+    "website-maken-leiden.html",
+    "app-maken-leiden.html",
+    "website-maken-maastricht.html",
+    "app-maken-maastricht.html",
+    "website-maken-zaandam.html",
+    "app-maken-zaandam.html"
+  ]
+}
