@@ -3,11 +3,18 @@
     'yourway-recruitment': true,
     'empower-recruitment': true,
     'fleur-recruitment': true,
+    'usforyourevent': true,
+    'plan-for-me': true,
+    'yoshorts': true,
+    'slimme-agents': true,
+    'usforyourevent-app': true,
   };
 
   var WEBSHOP_SLUGS = {
     'knallert-market': true,
     'autolak-online': true,
+    'flutter-habits': true,
+    'monleo-milano': true,
   };
 
   function slugFromArticle(article) {

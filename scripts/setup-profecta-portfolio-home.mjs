@@ -26,6 +26,24 @@ const projects = [
       'Flutter Habits beschikt nu over een webshop die professioneel oogt en verkoop ondersteunt. De merkbeleving sluit aan bij het product en bezoekers vinden sneller wat ze zoeken.',
   },
   {
+    slug: 'inter-jump',
+    name: 'Inter Jump',
+    image: 'interjump.png',
+    bg: '#c73b1d',
+    type: 'Website',
+    cms: 'Maatwerk',
+    branch: 'Events',
+    title: 'Portfolio Profecta Solutions: Website Inter Jump',
+    description:
+      'Bekijk Inter Jump (inter-jump.nl): de website voor het grootste springkussenbedrijf in Lelystad, met sterke vindbaarheid in Google.',
+    intro:
+      'Inter Jump is het grootste springkussenbedrijf in Lelystad en wilde een website die direct laat zien wat ze verhuren, vertrouwen wekt en aanvragen oplevert. De focus lag op een energieke uitstraling die past bij feesten en events, gecombineerd met vindbaarheid in de regio.',
+    approach:
+      'We bouwden een overzichtelijke website met duidelijke categorieën voor verhuur, sterke calls-to-action en een structuur die zoekmachines helpt begrijpen waar Inter Jump voor staat. Technisch en inhoudelijk is de basis gelegd voor lokale SEO rond springkussens en verhuur in Lelystad.',
+    result:
+      'Inter Jump heeft een professionele website op inter-jump.nl die bezoekers snel naar het juiste aanbod leidt. Bij het zoeken op "lelystad springkussen" staat het bedrijf op positie 1 in Google.',
+  },
+  {
     slug: 'usforyourevent',
     name: 'USFORYOUREVENT',
     image: 'usforyoureventmockup.png',
@@ -175,6 +193,62 @@ function carouselArticle(project) {
   return `<article class="portfoliowrapper swiper-slide"><a class="portfoliocontent" href="portfolio/${project.slug}.html" title="Bekijk ${project.name}" style="background-color: ${project.bg};"><div class="portfoliofoto"><picture class="img-holder stretchimg-holder"><img src="includes/_Files/profecta/portfolio/${project.image}" width="999" height="819" alt="${project.name}" class="landscape"></picture></div><div class="portfolioinfo"><div class="portfolioinfotxt"><h3 class="ellipsis">${project.name}</h3></div></div></a></article>\n`;
 }
 
+function websiteTypeFor(project) {
+  const type = project.type.toLowerCase();
+  if (type.includes('webshop')) return '2';
+  if (type.includes('app') || type.includes('platform') || type.includes('ai')) return '1';
+  return '3';
+}
+
+function overviewArticle(project) {
+  const websiteType = websiteTypeFor(project);
+  return `<article\r\nclass="portfoliowrapper is-future" data-url="${project.slug}" data-website-type="${websiteType}">\r\n<a\r\nclass="portfoliocontent" href="portfolio/${project.slug}.html" title="Bekijk ${project.name}" style="background-color: ${project.bg};"><div\r\nclass="portfoliofoto">\r\n<picture\r\nclass="img-holder stretchimg-holder">\r\n<img\r\nsrc="includes/_Files/profecta/portfolio/${project.image}" width="999" height="819" alt="${project.name}" title="${project.name}" class="landscape "></picture></div><div\r\nclass="portfolioinfo"><div\r\nclass="portfolioinfotxt"><h3 class="ellipsis">${project.name}</h3></div></div>\r\n</a>\r\n</article>`;
+}
+
+function buildPortfolioOverviewRows() {
+  const rows = [];
+  for (let i = 0; i < projects.length; i += 2) {
+    const chunk = projects.slice(i, i + 2).map((project) => overviewArticle(project)).join('\r\n');
+    rows.push(`<div\r\nclass="portfoliowrapper-row js-portfoliowrapper-row">\r\n${chunk}\r\n</div>`);
+  }
+  return rows.join('\r\n');
+}
+
+function removeProfectaOverviewArticles(html) {
+  let next = html;
+  for (const project of projects) {
+    const slug = project.slug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    next = next.replace(
+      new RegExp(`<article\\r?\\nclass="portfoliowrapper[^"]*"[^>]*data-url="${slug}"[\\s\\S]*?</article>\\r?\\n`, 'g'),
+      '',
+    );
+    next = next.replace(
+      new RegExp(`<article[\\s\\S]*?href="portfolio/${slug}\\.html"[\\s\\S]*?</article>\\r?\\n`, 'g'),
+      '',
+    );
+    next = next.replace(
+      new RegExp(`<article\\r?\\nclass="portfoliowrapper js-preloaded-item"[^>]*data-url="${slug}"[\\s\\S]*?</article>\\r?\\n`, 'g'),
+      '',
+    );
+  }
+  return next.replace(/<div\r?\nclass="portfoliowrapper-row js-portfoliowrapper-row">\s*<\/div>\r?\n/g, '');
+}
+
+function prependPortfolioOverview(html) {
+  let next = removeProfectaOverviewArticles(html);
+  const rowsHtml = buildPortfolioOverviewRows();
+  const marker = /class="portfolio-items-holder js-portfolio-items-holder scale"><div\r?\nclass="portfoliowrapper-row/;
+  if (!marker.test(next)) {
+    return html;
+  }
+  next = next.replace(
+    marker,
+    `class="portfolio-items-holder js-portfolio-items-holder scale">${rowsHtml}\r\n<div\r\nclass="portfoliowrapper-row`,
+  );
+  next = next.replace(/PortfolioOverview\.totalItems = \d+/, `PortfolioOverview.totalItems = ${85 + projects.length}`);
+  return next;
+}
+
 function createPortfolioPage(project) {
   const templatePath = path.join(root, 'portfolio', 'knallert-market.html');
   let html = fs.readFileSync(templatePath, 'utf8');
@@ -260,15 +334,34 @@ function createPortfolioPage(project) {
   fs.writeFileSync(path.join(root, 'portfolio', `${project.slug}.html`), html);
 }
 
-function prependProfectaCarousel(html, firstHref) {
+function prependProfectaCarousel(html, anchorHref) {
+  let next = html;
+  for (const project of projects) {
+    const slug = project.slug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    next = next.replace(
+      new RegExp(
+        `<article class="portfoliowrapper swiper-slide"><a class="portfoliocontent" href="portfolio/${slug}\\.html"[\\s\\S]*?</article>\\s*`,
+        'g',
+      ),
+      '',
+    );
+    next = next.replace(
+      new RegExp(
+        `<article\\r?\\nclass="portfoliowrapper swiper-slide"[\\s\\S]*?href="portfolio/${slug}\\.html"[\\s\\S]*?</article>\\r?\\n`,
+        'g',
+      ),
+      '',
+    );
+  }
   const profectaItems = projects.map((p) => carouselArticle(p).trim()).join('\n');
-  const profectaPattern = new RegExp(
-    `(${profectaItems.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*)+`,
-    'g',
+  const escapedHref = anchorHref.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const singleLine = new RegExp(
+    `(class="swiper-wrapper">\\s*)(<article class="portfoliowrapper swiper-slide"><a class="portfoliocontent" href="${escapedHref}")`,
   );
-  html = html.replace(profectaPattern, '');
-  const escapedHref = firstHref.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return html.replace(
+  if (singleLine.test(next)) {
+    return next.replace(singleLine, `$1${profectaItems}\n$2`);
+  }
+  return next.replace(
     new RegExp(
       `(id="portfolio-highlights-full-wrapper"[\\s\\S]*?class="swiper-wrapper">\\r?\\n)(<article\\r?\\nclass="portfoliowrapper swiper-slide">\\r?\\n<a\\r?\\nclass="portfoliocontent" href="${escapedHref}")`,
     ),
@@ -296,6 +389,17 @@ if (webdesignUpdated !== webdesignHtml) {
   console.log('updated webdesignbureau.html carousel');
 } else if (!webdesignHtml.includes('portfolio/flutter-habits.html')) {
   console.warn('webdesignbureau.html carousel update failed - check markup');
+}
+
+// portfolio.html overview: Profecta projecten eerst
+const portfolioPath = path.join(root, 'portfolio.html');
+let portfolioHtml = fs.readFileSync(portfolioPath, 'utf8');
+const portfolioUpdated = prependPortfolioOverview(portfolioHtml);
+if (portfolioUpdated !== portfolioHtml) {
+  fs.writeFileSync(portfolioPath, portfolioUpdated);
+  console.log('updated portfolio.html overview');
+} else if (!portfolioHtml.includes('portfolio/flutter-habits.html')) {
+  console.warn('portfolio.html overview update failed - check markup');
 }
 
 for (const project of projects) {
